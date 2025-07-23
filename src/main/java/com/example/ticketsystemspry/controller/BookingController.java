@@ -29,7 +29,8 @@ public class BookingController {
                     "booking", resp
                 )
             );
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             return ResponseEntity.badRequest().body(
                 java.util.Map.of(
                     "success", false,
@@ -49,7 +50,8 @@ public class BookingController {
                     "bookings", bookings
                 )
             );
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             return ResponseEntity.badRequest().body(
                 java.util.Map.of(
                     "success", false,
@@ -68,7 +70,8 @@ public class BookingController {
                 "success", true,
                 "message", "Booking cancelled successfully"
             ));
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             return ResponseEntity.badRequest().body(
                 java.util.Map.of(
                     "success", false,
