@@ -9,10 +9,10 @@ This is a backend REST API for booking event tickets, designed to handle concurr
 ##  Tech Stack
 
 - **Java 21**
-- **Spring Boot**
-- **H2 Database**
-- **Hibernate**
-- **Lombok**
+- **Spring Boot** 
+- **H2 Database** ( used H2 in-memory database for simplicity, can be replaced with any other DB )
+- **Hibernate** ( mainly used for ORM )
+- **Lombok** ( mainly used for reducing boilerplate code, getters/setters and constructors )
 - **Gradle**
 
 ---
@@ -63,6 +63,8 @@ This is a backend REST API for booking event tickets, designed to handle concurr
 
 - prevent double booking for the same user and event - if an user (user_id) has booked ticket(s) for a certain event (id), don't allow anymore booking for same user (holding itself should fail) -> hold seats api will handle this too.
 
+- In updateEvent: “Partial updates supported—only provided fields are updated.”
+- In Constraints: “Double booking for same user and event is prevented. Also, Expired holds are automatically released.”
 ---
 ### UML Diagram
 
@@ -75,7 +77,7 @@ This is a backend REST API for booking event tickets, designed to handle concurr
 
 ### Prerequisites
 
-- Java 17+
+- Java 21 or higher
 - Gradle (or use the included Gradle wrapper)
 
 ### Steps to Run

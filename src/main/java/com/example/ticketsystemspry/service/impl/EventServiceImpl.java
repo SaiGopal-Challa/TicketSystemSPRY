@@ -18,6 +18,7 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
+    // this for create event, new event
     @Override
     public EventDTO createEvent(EventDTO dto) {
         Event event = Event.builder()
@@ -31,6 +32,7 @@ public class EventServiceImpl implements EventService {
         return toDTO(eventRepository.save(event));
     }
 
+    // this for get all event, show all events
     @Override
     public List<EventDTO> getAllEvents() {
         return eventRepository.findAll().stream()
@@ -38,6 +40,7 @@ public class EventServiceImpl implements EventService {
                 .collect(Collectors.toList());
     }
 
+    // this for get one event, show one event by id
     @Override
     public EventDTO getEventById(UUID id) {
         Event event = eventRepository.findById(id)
@@ -45,6 +48,7 @@ public class EventServiceImpl implements EventService {
         return toDTO(event);
     }
 
+    // this for update event, change info of event
     @Override
     public EventDTO updateEvent(UUID id, EventDTO dto) {
         Event event = eventRepository.findByIdAndDeletedFalse(id)
@@ -69,6 +73,7 @@ public class EventServiceImpl implements EventService {
         return toDTO(eventRepository.save(event));
     }
 
+    // this for delete event, not real delete, just mark as deleted
     @Override
     public void deleteEvent(UUID id) {
         Event event = eventRepository.findByIdAndDeletedFalse(id)
@@ -77,6 +82,7 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
+    // this for convert event to dto, make response
     private EventDTO toDTO(Event ev) {
         return EventDTO.builder()
                 .id(ev.getId())

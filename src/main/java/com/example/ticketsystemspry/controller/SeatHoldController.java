@@ -13,6 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/events/")
 @RequiredArgsConstructor
+// only 2 endpoints for seat holding - one to hold, and other to cancel a hold
 public class SeatHoldController {
 
     private final SeatHoldService seatHoldService;

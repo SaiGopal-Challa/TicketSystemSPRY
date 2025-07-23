@@ -1,19 +1,18 @@
 package com.example.ticketsystemspry.controller;
 
 import com.example.ticketsystemspry.dto.EventDTO;
-import com.example.ticketsystemspry.dto.AvailabilityResponse;
 import com.example.ticketsystemspry.service.EventService;
 import com.example.ticketsystemspry.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/events/")
 @RequiredArgsConstructor
+// total 6 endpoints for events management
 public class EventController {
 
     private final EventService eventService;
@@ -59,6 +58,7 @@ public class EventController {
     }
 
     @GetMapping("getEvent/{id}")
+    // we don't get deleted events here ( deleted events are only shown in getAllEvents )
     public ResponseEntity<?> getEventById(@PathVariable UUID id) {
         try {
             EventDTO event = eventService.getEventById(id);
@@ -81,6 +81,7 @@ public class EventController {
     }
 
     @PutMapping("updateEvent/{id}")
+    // we can leave some fields empty to not update them
     public ResponseEntity<?> updateEvent( @PathVariable UUID id, @RequestBody EventDTO dto)
     {
         try {
@@ -120,6 +121,7 @@ public class EventController {
     }
 
     @GetMapping("availability/{eventId}")
+    // this is to just get count of available seats for an event
     public ResponseEntity<?> getAvailability(@PathVariable UUID eventId) {
         try {
             return ResponseEntity.ok(

@@ -24,6 +24,7 @@ public class SeatHoldServiceImpl implements SeatHoldService {
     private final SeatHoldRepository holdRepo;
     private final BookingRepository bookingRepo;
 
+    // this for hold seat, user want seat hold
     @Override
     @Transactional
     public HoldResponse holdSeats(UUID eventId, UUID userId, int seatCount) {
@@ -62,6 +63,7 @@ public class SeatHoldServiceImpl implements SeatHoldService {
                 .build();
     }
 
+    // this is for cancel hold, user want to cancle the hold now
     @Override
     public void cancelHold(UUID holdId) {
         SeatHold hold = holdRepo.findById(holdId)
@@ -74,6 +76,7 @@ public class SeatHoldServiceImpl implements SeatHoldService {
         }
     }
 
+    // this is for expire old hold, time passed expiry, seat to be freed
     @Override
     public void expireOldHolds() {
         LocalDateTime threshold = LocalDateTime.now().minusMinutes(5);

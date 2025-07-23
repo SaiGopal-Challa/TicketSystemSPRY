@@ -40,8 +40,7 @@ public class BookingServiceImpl implements BookingService {
                 .seatCount(hold.getSeatCount())
                 .bookedAt(LocalDateTime.now())
                 .status(Booking.BookingStatus.CONFIRMED)
-                .hold(hold)
-                .build();
+                .hold(hold).build();
 
         hold.setStatus(SeatHold.HoldStatus.EXPIRED);
         holdRepo.save(hold);
