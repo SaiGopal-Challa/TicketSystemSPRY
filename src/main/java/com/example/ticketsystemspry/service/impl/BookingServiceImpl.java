@@ -47,8 +47,7 @@ public class BookingServiceImpl implements BookingService {
         holdRepo.save(hold);
         bookingRepo.save(booking);
 
-        return BookingResponse.builder()
-                .bookingId(booking.getBookingId())
+        return BookingResponse.builder().bookingId(booking.getBookingId())
                 .eventId(booking.getEvent().getId())
                 .userId(booking.getUserId())
                 .seatCount(booking.getSeatCount())
@@ -56,8 +55,7 @@ public class BookingServiceImpl implements BookingService {
                 .status(booking.getStatus().name())
                 .eventName(booking.getEvent().getName())
                 .eventDate(booking.getEvent().getDate())
-                .eventLocation(booking.getEvent().getLocation())
-                .build();
+                .eventLocation(booking.getEvent().getLocation()).build();
     }
 
     @Override
@@ -79,12 +77,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public boolean cancelBooking(UUID bookingId, String reason) {
-        Booking booking = bookingRepo.findById(bookingId)
-                .orElse(null);
+        Booking booking = bookingRepo.findById(bookingId).orElse(null);
         if (booking == null) return false;
         booking.setStatus(Booking.BookingStatus.CANCELED);
-        if( reason != null && reason != ""){
-            booking.setStatus(Booking.cancelReason.reason);
+        if (reason != null && !reason.trim().isEmpty()) {
+            booking.setCancelReason(reason);
         }
 
         bookingRepo.save(booking);

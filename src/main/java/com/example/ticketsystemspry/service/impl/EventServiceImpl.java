@@ -84,6 +84,7 @@ public class EventServiceImpl implements EventService {
                 .date(ev.getDate())
                 .location(ev.getLocation())
                 .totalSeats(ev.getTotalSeats())
+                .isDeleted(ev.isDeleted())
                 .build();
     }
 }

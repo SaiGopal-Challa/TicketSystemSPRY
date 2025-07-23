@@ -17,4 +17,5 @@ public class EventDTO {
     private LocalDateTime date;
     private String location;
     private Integer totalSeats;
+    private Boolean isDeleted;
 }
