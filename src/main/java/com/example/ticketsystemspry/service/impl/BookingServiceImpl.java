@@ -83,7 +83,10 @@ public class BookingServiceImpl implements BookingService {
                 .orElse(null);
         if (booking == null) return false;
         booking.setStatus(Booking.BookingStatus.CANCELED);
-        // Optionally store the reason somewhere if you add a field for it
+        if( reason != null && reason != ""){
+            booking.setStatus(Booking.cancelReason.reason);
+        }
+
         bookingRepo.save(booking);
         return true;
     }
