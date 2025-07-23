@@ -9,7 +9,8 @@ import java.util.UUID;
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
     List<Booking> findByUserId(UUID userId);
 
-    // Sum for confirmed bookings
+    // Sum of confirmed bookings per event ( we can also use this to get canceled bookings count for audit )
+
     default int sumSeatsBooked(UUID eventId, Booking.BookingStatus status) {
         return this.findAll().stream()
                 .filter(b -> b.getEvent().getId().equals(eventId) && b.getStatus() == status)
