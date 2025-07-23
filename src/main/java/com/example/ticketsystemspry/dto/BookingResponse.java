@@ -6,15 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class BookingResponse {
-    private java.util.UUID bookingId;
-    private java.util.UUID eventId;
-    private java.util.UUID userId;
+    private UUID bookingId;
+    private UUID eventId;
+    private UUID userId;
     private int seatCount;
     private LocalDateTime bookedAt;
     private String status;
