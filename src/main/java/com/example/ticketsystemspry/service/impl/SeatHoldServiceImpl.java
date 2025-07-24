@@ -55,7 +55,7 @@ public class SeatHoldServiceImpl implements SeatHoldService {
                 .status(SeatHold.HoldStatus.HELD)
                 .build();
 
-        holdRepo.save(hold);
+        holdRepo.save(hold); // adding to table in db
 
         return HoldResponse.builder()
                 .holdId(hold.getHoldId())
@@ -70,19 +70,21 @@ public class SeatHoldServiceImpl implements SeatHoldService {
                 .orElseThrow(() -> new RuntimeException("Hold not found"));
         if (hold.getStatus() == SeatHold.HoldStatus.HELD) {
             hold.setStatus(SeatHold.HoldStatus.CANCELED);
-            holdRepo.save(hold);
+            holdRepo.save(hold); // update the table in db to remove hold on seats
         } else {
             throw new RuntimeException("Hold is not active");
         }
     }
 
     // this is for expire old hold, time passed expiry, seat to be freed
+    // this method is called only by scheduler every 1 minute
     @Override
     public void expireOldHolds() {
         LocalDateTime threshold = LocalDateTime.now().minusMinutes(5);
-        List<SeatHold> expired = holdRepo.findByStatusAndCreatedAtBefore(
-                SeatHold.HoldStatus.HELD, threshold);
+        List<SeatHold> expired = holdRepo.findByStatusAndCreatedAtBefore( SeatHold.HoldStatus.HELD, threshold);
+
         expired.forEach(h -> h.setStatus(SeatHold.HoldStatus.EXPIRED));
+
         holdRepo.saveAll(expired);
     }
 }

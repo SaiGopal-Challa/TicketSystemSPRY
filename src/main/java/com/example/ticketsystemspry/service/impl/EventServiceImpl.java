@@ -18,11 +18,11 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
-    // this for create event, new event
+    // this for create event, new event , also event id is auto generated if not given
     @Override
     public EventDTO createEvent(EventDTO dto) {
         Event event = Event.builder()
-                .id(UUID.randomUUID())
+                .id(dto.getId() != null ? dto.getId() : UUID.randomUUID())
                 .name(dto.getName())
                 .date(dto.getDate())
                 .location(dto.getLocation())

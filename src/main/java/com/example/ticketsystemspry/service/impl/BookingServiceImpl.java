@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+//  3 implementations, confirm booking, get bookings, cancel booking
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepo;
@@ -54,7 +55,8 @@ public class BookingServiceImpl implements BookingService {
                 .status(booking.getStatus().name())
                 .eventName(booking.getEvent().getName())
                 .eventDate(booking.getEvent().getDate())
-                .eventLocation(booking.getEvent().getLocation()).build();
+                .eventLocation(booking.getEvent().getLocation())
+                .cancelReason(booking.getCancelReason()).build();
     }
 
     @Override
@@ -70,6 +72,7 @@ public class BookingServiceImpl implements BookingService {
                         .eventName(b.getEvent().getName())
                         .eventDate(b.getEvent().getDate())
                         .eventLocation(b.getEvent().getLocation())
+                        .cancelReason(b.getCancelReason())
                         .build())
                 .collect(Collectors.toList());
     }

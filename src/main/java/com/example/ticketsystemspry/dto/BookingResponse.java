@@ -22,4 +22,5 @@ public class BookingResponse {
     private String eventName;
     private LocalDateTime eventDate;
     private String eventLocation;
+    private String cancelReason;
 }
